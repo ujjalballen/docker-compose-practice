@@ -1,0 +1,20 @@
+# Ignore sensitive environment variables
+.env
+
+# Ignore dependency directories
+node_modules/
+venv/
+env/
+
+# Ignore build output
+dist/
+build/
+*.exe
+*.dll
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
