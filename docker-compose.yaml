@@ -1,0 +1,45 @@
+version: '5.1.3'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - my-custome-network
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000/5001"
+    environment:
+      DB_HOST: database
+      DB_USER: postgres
+      DB_PASSWORD: database
+      DB_NAME: postgres
+    depends_on:
+      - database
+    networks:
+      - my-custome-network
+
+
+  database:
+    image: postgres:18-alpine
+    restart: always
+    environment:
+      POSTGRES_USERNAME=postgres
+      POSTGRES_PASSWORD=password
+      POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - my-custome-network
+
+
+volumes:
+  pgdata:
+
+networks:
+  my-custome-network:
+    driver: bridge
